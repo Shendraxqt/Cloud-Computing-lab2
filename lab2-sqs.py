@@ -1,3 +1,5 @@
+# Sending message to queue for processing & processing by the queue
+
 import boto3
 
 sqs = boto3.resource('sqs')
