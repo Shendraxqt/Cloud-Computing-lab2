@@ -1,4 +1,4 @@
-#Sending messaages to queue (client side)
+#Sending messages to queue (client side)
 
 import boto3
 
