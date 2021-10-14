@@ -4,6 +4,7 @@ import boto3
 
 sqs = boto3.resource('sqs')
 
+# creating the queue if not existing
 for mesqueue in sqs.queues.all():
    if mesqueue.url == "https://queue.amazonaws.com/706109239716/lab2":
        queue = sqs.get_queue_by_name(QueueName='lab2')
@@ -25,6 +26,7 @@ for i in range(10):
 
 response=queue.send_message(MessageBody=string)
 
+# processing message to extract the data
 for message in queue.receive_messages(MaxNumberOfMessages=10):
     tab=message.body.split()
     tabnum=list(map(int,tab))
