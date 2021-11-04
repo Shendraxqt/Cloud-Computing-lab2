@@ -4,6 +4,8 @@ import boto3
 
 sqs = boto3.resource('sqs')
 
+# from client to server
+
 queue = sqs.create_queue(QueueName='lab2', Attributes={'DelaySeconds': '0'})
 
 queueReponse = sqs.create_queue(QueueName='lab2.1', Attributes={'DelaySeconds': '0'})
@@ -21,6 +23,8 @@ for i in range(10):
         string = string+x+" "
 
 response=queue.send_message(MessageBody=string)
+
+# from server to client
 
 for message in queueReponse.receive_messages(MaxNumberOfMessages=10):
    print(message.body)
