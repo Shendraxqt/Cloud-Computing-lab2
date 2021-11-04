@@ -6,7 +6,7 @@ sqs = boto3.resource('sqs')
 
 queue = sqs.create_queue(QueueName='lab2', Attributes={'DelaySeconds': '0'})
 
-queueReponse = sqs.create_queue(QueueName='lab2.1', Attributes={'DelaySeconds': '0'})
+queueReponse = sqs.create_queue(QueueName='lab2_1', Attributes={'DelaySeconds': '0'})
 
 flag = True
 while flag :
@@ -17,8 +17,8 @@ while flag :
         if x=="":
             break
         elif not(x.isnumeric()) or int(x)<0:
+            # une entrée non valide va reduire la taille maximale du message de 1.
             print("entre non valide")
-            break
         else:
           string = string+x+" "
     response=queue.send_message(MessageBody=string)
