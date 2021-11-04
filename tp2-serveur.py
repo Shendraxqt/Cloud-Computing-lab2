@@ -19,5 +19,6 @@ while(1):
     if(answer != ""):
         response=queueReponse.send_message(MessageBody=answer)
 
-    #write log file in SC3
-    # TODO
+        #write log file in S3
+            with open('logs.txt', 'a') as f:
+                f.write(answer +'\n')
