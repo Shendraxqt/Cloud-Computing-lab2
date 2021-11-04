@@ -22,7 +22,7 @@ while flag :
         else:
           string = string+x+" "
     response=queue.send_message(MessageBody=string)
-    y=input("Voulez-vous envoyé un nouveau message? [Y/n]")
+    y=input("Voulez-vous envoyer un nouveau message? [Y/n]")
     if y!="Y":
         flag=False
 
