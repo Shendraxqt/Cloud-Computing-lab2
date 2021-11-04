@@ -6,6 +6,8 @@ sqs = boto3.resource('sqs')
 
 queue = sqs.create_queue(QueueName='lab2', Attributes={'DelaySeconds': '0'})
 
+queueReponse = sqs.create_queue(QueueName='lab2.1', Attributes={'DelaySeconds': '0'})
+
 string=""
 print("entrer votre liste de nombres (entre 1 et 10)")
 for i in range(10):
@@ -19,5 +21,9 @@ for i in range(10):
         string = string+x+" "
 
 response=queue.send_message(MessageBody=string)
+
+for message in queueReponse.receive_messages(MaxNumberOfMessages=10):
+   print(message.body)
+   message.delete()
 
 
