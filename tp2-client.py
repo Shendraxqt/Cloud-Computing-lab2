@@ -23,7 +23,7 @@ while flag :
           string = string+x+" "
     response=queue.send_message(MessageBody=string)
     y=input("Voulez-vous envoyer un nouveau message? [Y/n]")
-    if y!="Y":
+    if(not(y =='Y' or y =='y')):
         flag=False
 
 
