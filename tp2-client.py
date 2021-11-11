@@ -11,13 +11,13 @@ queueReponse = sqs.create_queue(QueueName='lab2_1', Attributes={'DelaySeconds': 
 flag = True
 while flag :
     string=""
-    print("entrer votre liste de nombres (entre 1 et 10)")
+    print("entrez votre liste de nombres (entre 1 et 10 nombres)")
     for i in range(10):
-        x=input("Entre le {} ème nombre (pour arretr avant le dernier, faite entrer)".format(i+1))
+        x=input("Entrez le {} ème nombre (pour arreter avant le dernier, faites entrer)".format(i+1))
         if x=="":
             break
         elif not(x.isnumeric()) or int(x)<0:
-            print("entre non valide")
+            print("entree non valide")
         else:
           string = string+x+" "
     response=queue.send_message(MessageBody=string)
