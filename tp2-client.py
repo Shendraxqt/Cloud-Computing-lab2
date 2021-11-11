@@ -1,5 +1,3 @@
-#Sending messages to queue (client side)
-
 import boto3
 
 sqs = boto3.resource('sqs')
@@ -8,6 +6,7 @@ queue = sqs.create_queue(QueueName='lab2', Attributes={'DelaySeconds': '0'})
 
 queueReponse = sqs.create_queue(QueueName='lab2_1', Attributes={'DelaySeconds': '0'})
 
+# Sending messages to queue
 flag = True
 while flag :
     string=""
@@ -26,7 +25,7 @@ while flag :
         flag=False
         
 
-
+# Receiving messages and printing them
 while True:
     for message in queueReponse.receive_messages(MaxNumberOfMessages=10):
         print(message.body)
