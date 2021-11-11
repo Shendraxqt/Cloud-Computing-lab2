@@ -1,6 +1,7 @@
 import boto3
 import random
 import cv2
+from pathlib import Path
 
 BUCKET_NAME = 'lab2-images-hotdog'
 
@@ -22,6 +23,12 @@ def download_files():
             label = cv2.waitKey(0)
         cv2.destroyAllWindows()
 
+def upload_files():
+    s3 = boto3.resource('s3')
+    # select bucket
+    my_bucket = s3.Bucket(BUCKET_NAME)
+    my_bucket.upload_file("ImagesUpload/hotdog_dog.jpg","hotdog.jpg")
+
 
 print("Si vous voulez labelliser des images, appuyez sur 'L', si vous voulez uploader des images, appuyez sur 'U', si vous voulez quitter, appuyez sur 'Q'. ")
 flag = True
@@ -32,7 +39,7 @@ while flag :
         flag = False
     elif x=="U" or x=="u":
         # to add
-        print("not implemented yet")
+        upload_files()
         flag = False
     elif x=="Q" or x=="q":
         flag = False
