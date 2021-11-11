@@ -27,8 +27,12 @@ def upload_files():
     s3 = boto3.resource('s3')
     # select bucket
     my_bucket = s3.Bucket(BUCKET_NAME)
-    my_bucket.upload_file("ImagesUpload/hotdog_dog.jpg","hotdog.jpg")
-
+    file_path = input("Entrez le chemin de l'image à upload")//new
+    my_bucket.upload_file(file_path,"hotdog.jpg")//changer file_path a la place de "ImagesUpload/hotdog_dog.jpg"
+    x=input("Voulez vous uploader une autre image? [Y/n]")//new
+    if(x =='Y' or x =='y'))://new//new
+        upload_files()//new
+    
 
 print("Si vous voulez labelliser des images, appuyez sur 'L', si vous voulez uploader des images, appuyez sur 'U', si vous voulez quitter, appuyez sur 'Q'. ")
 flag = True
