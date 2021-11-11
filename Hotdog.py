@@ -1,7 +1,8 @@
 import boto3
 import random
 import cv2
-from pathlib import Path
+import os, glob
+
 
 BUCKET_NAME = 'lab2-images-hotdog'
 
@@ -27,17 +28,15 @@ def upload_files():
     s3 = boto3.resource('s3')
     # select bucket
     my_bucket = s3.Bucket(BUCKET_NAME)
-    file_path = input("Entrez le chemin de l'image à upload")//new
-    my_bucket.upload_file(file_path,"hotdog.jpg")//changer file_path a la place de "ImagesUpload/hotdog_dog.jpg"
-    x=input("Voulez vous uploader une autre image? [Y/n]")//new
-    if(x =='Y' or x =='y'))://new//new
-        upload_files()//new
+    folder_path = 'ImagesUpload'
+    for file in glob.glob(os.path.join(folder_path, '*')):
+        my_bucket.upload_file(file,file)
     
 
 print("Si vous voulez labelliser des images, appuyez sur 'L', si vous voulez uploader des images, appuyez sur 'U', si vous voulez quitter, appuyez sur 'Q'. ")
 flag = True
 while flag :
-    x = input("[L/U/Q]")
+    x = input("[L/U/Q] ")
     if x =="L" or x=="l":
         download_files()
         flag = False
