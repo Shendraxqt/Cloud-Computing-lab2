@@ -1,6 +1,6 @@
-# Cloud Comuting :Lab 2
+# Cloud Comuting : Lab 2
 
-blabla
+authors : BICHICHI Youssef, FEUILLET Maxime, LUIS Flavien, LEMARQUAND Paul
 
 ## bla
 
