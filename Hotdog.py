@@ -4,7 +4,7 @@ import cv2
 import os, glob
 
 
-BUCKET_NAME = 'lab2-images-hotdog2'
+BUCKET_NAME = 'lab2-images-hotdog'
 
 def download_files():
     s3 = boto3.resource('s3')
@@ -32,9 +32,12 @@ def upload_files():
     folder_path=input("Entrez le chemin du dossier/fichiers a upload : ")
     if os.path.isdir(folder_path) :
         for file in glob.glob(os.path.join(folder_path, '*')):
-            my_bucket.upload_file(file,"underbase/{}.jpg".format(file))
+            file_name = file.split('\\')[-1]
+            my_bucket.upload_file(file,"underbase/{}".format(file_name))
+            print("L'image a été envoyée avec succès")
     elif os.path.isfile:
-        my_bucket.upload_file(folder_path,"underbase/{}.jpg".format(folder_path))
+        my_bucket.upload_file(folder_path,"underbase/{}".format(folder_path))
+        print("L'image a été envoyée avec succès")
         
 
         
