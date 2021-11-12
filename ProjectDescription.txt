@@ -17,4 +17,14 @@ Description de la partie 1 :
 
 
 Description de la partie 2 :
+  Cette partie consiste à afficher 4 images aléatoires parmi une base de données dans un S3 bucket au client qui doit pouvoir ensuite les labélisé 0 ou 1 en fonction quelles sont
+  des hot-dogs ou non. Les labels données par les clients seront tous écrient dans un fichier csv stocké dans le même bucket que la base de données. Les utilisateurs peuvent
+  également uploader des images sur la base de données si ils le souhaitent.
   
+  Nous avons utilisés un script python avec opencv pour faire cette application. Tous d'abord, l'utilisateur paut choisir si il souhaite uploader une ou plusieurs images,
+  labéliser des images ou quitter l'application. Si il souhaite uploader des images, l'application vas lui demander de rentrer le chemin du dossier ou du fichier qu'il souhaite
+  uploader. Si ce chemin est valide on uploaderas alors le fichier ou tout les fichiers du dossier dans le dossier de notre S3 bucket correspondant à la base de données. Un
+  message signalant la réussite de l'upload s'affichera et l'application retourneras au choix du début. Si on choisit de labéliser des images, l'application va récupérer toutes
+  les images du dossier correspondant à la BDD du bucket puis choisira 4 images aléatoirement parmi la base. L'application affichera alors la première image et nous demanderas de
+  la labéliser par 0 ou 1 (si une autre entrée est tappée elle seras considéré comme invalide et il vous seras à nouveau demandé de labéliser l'image). Le label rentré seras
+  ajouté au csv dans le bucket. Une fois une image labélisée, on passe à la suivante. Lorsque les 4 images ont été labélisée, on revient au choix du début.
