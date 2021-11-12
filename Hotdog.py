@@ -19,6 +19,7 @@ def download_files():
         img = cv2.imread(filename)
         cv2.imshow(filename, img)
         label = cv2.waitKey(0)
+        //TODO : ecrire le label dans le csv sur le bucket s3
         while label != 48 and label != 49: #code ASCII de 0 et 1
             print("Vous ne pouvez étiqueter qu'avec 0 ou 1  !")
             label = cv2.waitKey(0)
@@ -29,6 +30,8 @@ def upload_files():
     # select bucket
     my_bucket = s3.Bucket(BUCKET_NAME)
     folder_path = 'ImagesUpload'
+    //TODO : permettre a l'utilisateur de choisir le fichier à upload
+    //TODO : pouvoir upload des fichiers en plus des folders
     for file in glob.glob(os.path.join(folder_path, '*')):
         my_bucket.upload_file(file,file)
     
