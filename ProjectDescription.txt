@@ -1,30 +1,13 @@
-Ce projet est en deux parties : la partie 1 constiuée des fichiers tp2-serveur.py et tp2-client.py et la partie 2 constitué des fichiers Hotdog.py, underbase.csv et du dossier underbase.
+Ce projet est en deux parties : la partie 1 constituée des fichiers tp2-serveur.py et tp2-client.py et la partie 2 constitué des fichiers Hotdog.py,  underbase.csv et du dossier underbase . 
 
-Description de la partie 1 :
-  Cette partie consiste à envoyer depuis un client un ou plusieurs messages composés d'entre 1 et 10 nombres positifs sur une queue sqs. Ensuite, la partie serveur, contenu dans 
-  une instance EC2, récupére le ou les messages en attende sur la queue et calcule la moyenne, la médiane, le maximum et le minimum de la série de nombre. Le serveur renvoie alors
-  les résultats dans une nouvelle queue et ecrit à la fois le(s) message(s) recu(s) et la(les) réponse(s) sur un fichier log stocké dans un S3 bucket. Finalement le client lit les
-  messages sur la nouvelle queue et retourne les réponses recues.
-  
-  Dans notre projet, le client est un script python que l'on peut lancer en local. Il nous demande alors d'entrer entre 1 et 10 nombres un par un (pour passer à l'entrée suivante
-  on appuye sur entré et si on souhaite s'atrréter avant 10 nombres, il suffit d'appuyer sur entrée sans avoir écrit de nombre). Une fois cela fait on peut saisir un nouveau
-  message en répondant Y ou y lorsque le script nous demande si l'on veut saisir un nouveau message. Tout autre entrée mettera fin à l'étape de saisie. Si l'on entre autre chose
-  qu'un nombre positif, le programme nous informe que l'entré est non valide et ne l'ajoute pas au message qui sera envoyé mais continue la saisie (l'entrée non valide compteras
-  cependant bien dans le nombre d'entré maximale possible). Une fois qu'un message est saisie il est envoyé sur la queue nomée lab2.
-  Le serveur est quand à lui constament à l'écoute de la queue lab2. Si un message est sur la queue, il récupére les nombres qui le compose et calcule la moyenne, la médiane, le
-  maximum et le minimum pour chaque message sur la queue puis les supprime. Une fois qu'une réponse est prête, il l'envoie sur la queue lab2_1 et écrit et upload le log.
-  Si il n'est pas en train de recevoir une saisie, le client écoute la queue lab2_1 et si des messages y sont présent, il les écrit et les supprime de la queue.
+Description de la partie 1 : 
+Cette partie consiste à envoyer depuis un client un ou plusieurs messages composés d'entre 1 et 10 nombres positifs sur une queue sqs . Ensuite, la partie serveur, contenu dans une instance EC2, récupère le ou les messages en attente dans la queue et calcule la moyenne, la médiane, le maximum et le minimum de la série de nombre. Le serveur renvoie alors les résultats dans une nouvelle queue et écrit à la fois le(s) message(s) reçu(s) et la(les) réponse(s) sur un fichier log stocké dans un bucket s3 . Finalement le client lit les messages sur la nouvelle queue et renvoie les réponses reçues. 
+Dans notre projet, le client est un script python que l'on peut lancer en local. Il nous demande alors d'entrer entre 1 et 10 nombres un par un (pour passer à l'entrée suivante on appuie sur entré et si on souhaite s’arrêter avant 10 nombres, il suffit d'appuyer sur entrée sans avoir écrit de nombre). Une fois cela fait on peut saisir un nouveau message en répondant Y ou y lorsque le script nous demande si l'on veut saisir un nouveau message. Tout autre entrée mettra fin à l'étape de saisie. Si l'on entre autre chose qu'un nombre positif, le programme nous informe que l'entrée est non valide et ne l'ajoute pas au message qui sera envoyé mais continue la saisie (l'entrée non valide compteras cependant bien dans le nombre d'entré maximale possible). 
+Une fois qu'un message est saisi il est envoyé sur la queue nommée lab2. Le serveur est quand à lui constamment à l'écoute de la queue lab2. Si un message est dans la queue, il récupère les nombres qui le composent et calcule la moyenne, la médiane, le maximum et le minimum pour chaque message dans la queue puis les supprime. Une fois qu'une réponse est prête, il l'envoie dans la queue lab2_1 et écrit et upload le log. Si il n'est pas en train de recevoir une saisie, le client écoute la queue lab2_1 et si des messages y sont présent, il les écrit et les supprime de la queue. 
 
+Description de la partie 2 : 
 
-Description de la partie 2 :
-  Cette partie consiste à afficher 4 images aléatoires parmi une base de données dans un S3 bucket au client qui doit pouvoir ensuite les labélisé 0 ou 1 en fonction quelles sont
-  des hot-dogs ou non. Les labels données par les clients seront tous écrient dans un fichier csv stocké dans le même bucket que la base de données. Les utilisateurs peuvent
-  également uploader des images sur la base de données si ils le souhaitent.
-  
-  Nous avons utilisés un script python avec opencv pour faire cette application. Tous d'abord, l'utilisateur paut choisir si il souhaite uploader une ou plusieurs images,
-  labéliser des images ou quitter l'application. Si il souhaite uploader des images, l'application vas lui demander de rentrer le chemin du dossier ou du fichier qu'il souhaite
-  uploader. Si ce chemin est valide on uploaderas alors le fichier ou tout les fichiers du dossier dans le dossier de notre S3 bucket correspondant à la base de données. Un
-  message signalant la réussite de l'upload s'affichera et l'application retourneras au choix du début. Si on choisit de labéliser des images, l'application va récupérer toutes
-  les images du dossier correspondant à la BDD du bucket puis choisira 4 images aléatoirement parmi la base. L'application affichera alors la première image et nous demanderas de
-  la labéliser par 0 ou 1 (si une autre entrée est tappée elle seras considéré comme invalide et il vous seras à nouveau demandé de labéliser l'image). Le label rentré seras
-  ajouté au csv dans le bucket. Une fois une image labélisée, on passe à la suivante. Lorsque les 4 images ont été labélisée, on revient au choix du début.
+Cette partie consiste à afficher 4 images aléatoires parmi une base de données dans un bucket s3 au client qui doit pouvoir ensuite les labelliser (0 ou 1) en fonction du fait qu’elles soient des hot-dogs ou non. Les labels données par les clients seront tous écris dans un fichier .csv stocké dans le même bucket que la base de données. Les utilisateurs peuvent également uploader des images sur la base de données si ils le souhaitent. 
+Nous avons utilisés un script python avec opencv pour faire cette application. Tous d'abord, l'utilisateur peut choisir si il souhaite uploader une ou plusieurs images, labelliser des images ou quitter l'application. Si il souhaite uploader des images, l'application vas lui demander de rentrer le chemin du dossier ou du fichier qu'il souhaite uploader. Si ce chemin est valide on uploaderas alors le fichier ou tout les fichiers du dossier dans le dossier de notre bucket s3 correspondant à la base de données. 
+Un message signalant la réussite de l'upload s'affichera et l'application retourneras au choix du début. Si on choisit de labelliser des images, l'application va récupérer toutes les images du dossier correspondant à la BDD du bucket puis choisira 4 images aléatoirement parmi la base. 
+L'application affichera alors la première image et nous demanderas de la labelliser par 0 ou 1 (si une autre entrée est tapée elle seras considérée comme invalide et il vous seras à nouveau demandé de labelliser l'image). Le label rentré seras ajouté au csv dans le bucket. Une fois une image labellisée, on passe à la suivante. Lorsque les 4 images ont été labellisée, on revient au choix du début. 
